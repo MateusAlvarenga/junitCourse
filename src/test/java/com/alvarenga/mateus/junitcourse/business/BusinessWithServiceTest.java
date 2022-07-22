@@ -17,7 +17,6 @@ public class BusinessWithServiceTest {
    @InjectMocks
    BusinessWithServiceImpl business;
 
-
     @Test
     public void testCalculateSum() {
         // given

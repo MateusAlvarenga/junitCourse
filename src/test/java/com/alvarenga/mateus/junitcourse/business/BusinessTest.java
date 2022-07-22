@@ -1,17 +1,22 @@
 package com.alvarenga.mateus.junitcourse.business;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class BusinessTest {
+
+    @InjectMocks
+    BusinessImpl business;
 
     @Test
     public void testCalculateSum() {
         // given
-        BusinessImpl business = new BusinessImpl();
         int[] numbers = {5,5,5};
         //when
         int result = business.calculateSum(numbers);
@@ -22,7 +27,6 @@ public class BusinessTest {
     @Test
     public void testCalculateSumEmpty() {
         // given
-        BusinessImpl business = new BusinessImpl();
         int[] numbers = {};
         //when
         int result = business.calculateSum(numbers);
@@ -33,11 +37,12 @@ public class BusinessTest {
     @Test
     public void testCalculateSumOneValue() {
         // given
-        BusinessImpl business = new BusinessImpl();
         int[] numbers = {10};
         //when
         int result = business.calculateSum(numbers);
         //then
         assertEquals(10, result);
+        
+       
     }
 }
