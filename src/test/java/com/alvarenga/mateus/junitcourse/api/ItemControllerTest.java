@@ -51,7 +51,7 @@ public class ItemControllerTest {
 
         JSONAssert.assertEquals(
                 Response.getResponse().getContentAsString(),
-                objectMapper.writeValueAsString(itemTest), false);
+                objectMapper.writeValueAsString(itemTest), true);
     }
 
 

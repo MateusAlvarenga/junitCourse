@@ -1,17 +1,39 @@
 package com.alvarenga.mateus.junitcourse.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@AllArgsConstructor
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.PostLoad;
+import javax.persistence.Transient;
+
 @Getter
 @Setter
 @ToString
+@Entity
 public class Item {
-    private int id;
+    @Id
+    private Integer id;
     private String name;
     private int price;
     private int quantity;
+    @Transient
+    private int total;
+
+
+    public Item() {
+    }
+
+    public Item(Integer id, String name, int price, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        calculateTotal();
+    }
+
+    @PostLoad
+    public void calculateTotal() {
+        total = price * quantity;
+    }
 }
