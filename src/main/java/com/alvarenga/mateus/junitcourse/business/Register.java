@@ -2,7 +2,7 @@ package com.alvarenga.mateus.junitcourse.business;
 
 import java.util.Arrays;
 
-public class Register {
+public class Register{
 	
 	private RegisterService registerService;
 	
