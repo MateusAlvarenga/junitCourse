@@ -15,6 +15,7 @@ public class Item {
     @Id
     private Integer id;
     private String name;
+
     private int price;
     private int quantity;
     @Transient

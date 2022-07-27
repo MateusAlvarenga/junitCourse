@@ -3,6 +3,7 @@ package com.alvarenga.mateus.junitcourse.api;
 import com.alvarenga.mateus.junitcourse.business.ItemService;
 import com.alvarenga.mateus.junitcourse.domain.model.Item;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -43,6 +44,29 @@ public class ItemControllerTest {
 
         RequestBuilder request = MockMvcRequestBuilders
                 .get("/api/item/first")
+                .accept(MediaType.APPLICATION_JSON);
+
+        MvcResult Response = mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andReturn();
+
+        JSONAssert.assertEquals(
+                Response.getResponse().getContentAsString(),
+                objectMapper.writeValueAsString(itemTest), true);
+    }
+
+
+    @Test
+    @SneakyThrows
+    public void testPost(){
+        Item itemTest = new Item( null,"Item 1", 10,20);
+
+        when(itemService.getFirst())
+                .thenReturn(itemTest);
+
+        RequestBuilder request = MockMvcRequestBuilders
+                .post("/api/item/first")
+                .content(objectMapper.writeValueAsString(itemTest))
                 .accept(MediaType.APPLICATION_JSON);
 
         MvcResult Response = mockMvc.perform(request)

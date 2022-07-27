@@ -1,6 +1,5 @@
-package com.alvarenga.mateus.junitcourse.business;
+package com.alvarenga.mateus.junitcourse.domain.model;
 
-import com.alvarenga.mateus.junitcourse.domain.model.Item;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
