@@ -24,8 +24,8 @@ public class JSONpathParserTest {
         DocumentContext context = JsonPath.parse(json);
         var result = context.read("$.[0].name");
         var length = context.read("$.length()");
-        List<Integer> prices = (ArrayList) context.read("$.[*].price");
-        List<Integer> quantities = (ArrayList) context.read("$.[*].quantity");
+        var prices = (ArrayList) context.read("$.[*].price");
+        var quantities = (ArrayList) context.read("$.[*].quantity");
 
         assertThat(result).isEqualTo("Item 1");
         assertThat(length).isEqualTo(3);

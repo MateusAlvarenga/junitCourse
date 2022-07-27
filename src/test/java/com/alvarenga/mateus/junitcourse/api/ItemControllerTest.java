@@ -4,7 +4,7 @@ import com.alvarenga.mateus.junitcourse.business.ItemService;
 import com.alvarenga.mateus.junitcourse.domain.model.Item;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -61,13 +63,13 @@ public class ItemControllerTest {
     public void testPost(){
         Item itemTest = new Item( null,"Item 1", 10,20);
 
-        when(itemService.getFirst())
+        when(itemService.save(any(Item.class)))
                 .thenReturn(itemTest);
 
         RequestBuilder request = MockMvcRequestBuilders
-                .post("/api/item/first")
+                .post("/api/item")
                 .content(objectMapper.writeValueAsString(itemTest))
-                .accept(MediaType.APPLICATION_JSON);
+                .contentType(MediaType.APPLICATION_JSON);
 
         MvcResult Response = mockMvc.perform(request)
                 .andExpect(status().isOk())
